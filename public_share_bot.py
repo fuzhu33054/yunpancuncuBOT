@@ -126,7 +126,7 @@ def require_group_membership(func):
             return await func(update, context, *args, **kwargs)
         else:
             # 假设你的机器人链接变量如下 (请替换为你实际的机器人链接)
-            BOT_START_LINK = "https://t.me/sogoaibot?start=8438438776" 
+            BOT_START_LINK = "https://t.me/sogoaibot?start=8476783023" 
             
             if update.callback_query:
                 await update.callback_query.answer("⚠️ 操作受限，请先启动机器人加入我们的官方群组。", show_alert=True)
@@ -225,12 +225,12 @@ async def show_shared_files_page(update: Update, context: ContextTypes.DEFAULT_T
         # ▼▼▼▼▼▼▼▼▼▼ 修改开始 ▼▼▼▼▼▼▼▼▼▼
         
         # 你的广告文本定义
-        AD_TEXT = "极搜资源搜索搜片搜群" 
-        AD_LINK = "https://t.me/jisou?start=a_8438438776" # 这里换成你的链接
+        AD_TEXT = "ㅤㅤㅤ" 
+        AD_LINK = "" # 这里换成你的链接
         
         text = (
             f"▶️ 正在查看: {file_caption}\n"
-            f"💎 [{AD_TEXT}]({AD_LINK})\n"
+            f" [{AD_TEXT}]({AD_LINK})\n"
             f"📑 第 {page} 页 / 共 {total_pages} 页 (总计 {total_files} 个文件)"
         )
         
@@ -287,7 +287,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             
             # 2. 外部机器人链接 (用于 "启动机器人")
             # ★★★ 请在这里填入你想让用户点击 "启动机器人" 时跳转的链接 ★★★
-            EXTERNAL_BOT_LINK = "https://t.me/sogoaibot?start=8438438776" 
+            EXTERNAL_BOT_LINK = "https://t.me/sogoaibot?start=8476783023" 
 
             # 定义三个按钮，垂直排列
             keyboard = InlineKeyboardMarkup([
