@@ -214,15 +214,32 @@ async def show_shared_files_page(update: Update, context: ContextTypes.DEFAULT_T
         sent_messages = await context.bot.copy_messages(chat_id=update.effective_chat.id, from_chat_id=PRIVATE_CHANNEL_ID, message_ids=ids_to_send)
         context.user_data['last_page_file_ids'] = [msg.message_id for msg in sent_messages]
 
+        # ▼▼▼▼▼▼▼▼▼▼ 新增：让程序暂停 1 秒钟 ▼▼▼▼▼▼▼▼▼▼
+        # 这能确保图片/视频先加载出来，然后控制面板才会在最底部出现
+        await asyncio.sleep(3) 
+        # ▲▲▲▲▲▲▲▲▲▲ 结束新增 ▲▲▲▲▲▲▲▲▲▲
+
         keyboard = create_pagination_keyboard(page, total_pages, "spage", share_id)
         reply_markup = InlineKeyboardMarkup(keyboard)
-        text = f"▶️ **正在查看:** {file_caption}\n\n📑 第 {page} 页 / 共 {total_pages} 页 (总计 {total_files} 个文件)"
+        
+        # ▼▼▼▼▼▼▼▼▼▼ 修改开始 ▼▼▼▼▼▼▼▼▼▼
+        
+        # 你的广告文本定义
+        AD_TEXT = "极搜资源搜索搜片搜群" 
+        AD_LINK = "https://t.me/jisou?start=a_8438438776" # 这里换成你的链接
+        
+        text = (
+            f"▶️ 正在查看: {file_caption}\n"
+            f"💎 [{AD_TEXT}]({AD_LINK})\n"
+            f"📑 第 {page} 页 / 共 {total_pages} 页 (总计 {total_files} 个文件)"
+        )
         
         new_panel = await context.bot.send_message(
             chat_id=update.effective_chat.id,
             text=text,
             reply_markup=reply_markup,
-            parse_mode="Markdown"
+            parse_mode="Markdown",
+            disable_web_page_preview=True  # ★★★ 关键修改：禁止显示网页预览 ★★★
         )
         context.user_data['last_control_panel_id'] = new_panel.message_id
 
